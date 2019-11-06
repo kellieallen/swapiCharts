@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { actions as starWarsActions } from '../redux/modules/starWars';
@@ -7,6 +8,7 @@ import BarChart from '../components/charts/BarChart';
 import TetrisChart from '../components/charts/TetrisChart';
 import Tooltip from '../components/Tooltip';
 import '../styles/pages/secret-platform-prototype.scss';
+
 
 class SecretPlatformPrototype extends React.PureComponent {
   static propTypes = {
@@ -70,7 +72,25 @@ class SecretPlatformPrototype extends React.PureComponent {
       speciesChartData: [],
       planetChartData: []
     };
+    this.getSpecies = this.getSpecies.bind(this);
   }
+
+  // kellie added this code 
+
+  getSpecies() {
+    return axios.get("https://cors-anywhere.herokuapp.com/http://swapi.co/api/species/")
+    .then((response) => {
+      console.log(response.data.results);
+      this.setState( { speciesChartData: response.data.results})
+      console.log(this.state.speciesChartData)
+    })
+  }
+
+  componentDidMount() {
+    this.getSpecies()
+  }
+
+  // kellie added above code
 
   renderPlanetChartTooltip = ({ name, value }) => {
     return (
@@ -106,7 +126,8 @@ class SecretPlatformPrototype extends React.PureComponent {
             className="species-chart"
             isLoading={isLoadingStarWarsData.species === undefined || isLoadingStarWarsData.species}
           >
-            <BarChart data={speciesChartData} xKey="name" yKey="value" />
+           g
+
           </Tile>
           <Tile
             title="Star Wars Planet Diameters (km)"
