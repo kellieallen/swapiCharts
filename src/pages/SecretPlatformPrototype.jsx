@@ -10,6 +10,8 @@ import Tooltip from '../components/Tooltip';
 import '../styles/pages/secret-platform-prototype.scss';
 
 
+
+
 class SecretPlatformPrototype extends React.PureComponent {
   static propTypes = {
     starWarsData: PropTypes.shape({
@@ -20,6 +22,8 @@ class SecretPlatformPrototype extends React.PureComponent {
       species: PropTypes.bool,
       planets: PropTypes.bool
     })
+
+    
   };
 
   static instructions = () => {
@@ -65,24 +69,32 @@ class SecretPlatformPrototype extends React.PureComponent {
     );
   };
 
+  
+
   constructor() {
     super();
+
+    
 
     this.state = {
       speciesChartData: [],
       planetChartData: []
     };
-    this.getSpecies = this.getSpecies.bind(this);
+    // this.getSpecies = this.getSpecies.bind(this);
+    // this.getPlanet = this.getPlanet.bind(this);
+
+    
   }
 
-  // kellie added this code 
+  
+  
 
   getSpecies() {
     return axios.get("https://cors-anywhere.herokuapp.com/http://swapi.co/api/species/")
     .then((response) => {
-      console.log(response.data.results);
+      // console.log(response.data.results);
       this.setState( { speciesChartData: response.data.results})
-      console.log(this.state.speciesChartData)
+     
     })
   }
 
@@ -90,14 +102,25 @@ class SecretPlatformPrototype extends React.PureComponent {
     this.getSpecies()
   }
 
-  // kellie added above code
+  // getPlanets() {
+  //   return axios.get("https://cors-anywhere.herokuapp.com/http://swapi.co/api/planets/")
+  //   .then((response) => {
+  //     console.log(response.data.results);
+  //     this.setState( { planetChartData: response.data.results})
+     
+  //   })
+  // }
 
-  renderPlanetChartTooltip = ({ name, value }) => {
+  // componentDidMount() {
+  //   this.getPlanets()
+  // }
+
+  renderPlanetChartTooltip = ({ name, diameter }) => {
     return (
       <div className="flex-container justify-between align-baseline secret-platform-prototype-chart-tooltip">
-        <div className="secret-platform-prototype-chart-tooltip-name">{name}</div>
+        <div className="secret-platform-prototype-chart-tooltip-name">{diameter}</div>
         <div className="flex-container align-baseline secret-platform-prototype-chart-tooltip-value">
-          {value.toLocaleString('en-US')}
+          {diameter.toLocaleString('en-US')}
           <div className="secret-platform-prototype-chart-tooltip-value-unit">km</div>
         </div>
       </div>
@@ -124,15 +147,15 @@ class SecretPlatformPrototype extends React.PureComponent {
           <Tile
             title="Star Wars Species Average Heights (cm)"
             className="species-chart"
-            isLoading={isLoadingStarWarsData.species === undefined || isLoadingStarWarsData.species}
+            // isLoading={isLoadingStarWarsData.species === undefined || isLoadingStarWarsData.species}
           >
-           g
+            <BarChart data={speciesChartData} xKey="name" yKey="average_height" />
 
           </Tile>
           <Tile
             title="Star Wars Planet Diameters (km)"
             className="planets-chart"
-            isLoading={isLoadingStarWarsData.planets === undefined || isLoadingStarWarsData.planets}
+            // isLoading={isLoadingStarWarsData.planets === undefined || isLoadingStarWarsData.planets}
           >
             <TetrisChart data={planetChartData} onSectionHover={this.renderPlanetChartTooltip} />
           </Tile>
