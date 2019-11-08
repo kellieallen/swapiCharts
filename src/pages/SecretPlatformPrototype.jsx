@@ -74,16 +74,16 @@ class SecretPlatformPrototype extends React.PureComponent {
     };
   }
 
-  componentDidMount() {
-    this.getSpecies();
+  // eslint-disable-next-line react/sort-comp
+  async getSpecies() {
+    const response = await axios.get(
+      'https://cors-anywhere.herokuapp.com/http://swapi.co/api/species/'
+    );
+    this.setState({ speciesChartData: response.data.results });
   }
 
-  getSpecies() {
-    return axios
-      .get('https://cors-anywhere.herokuapp.com/http://swapi.co/api/species/')
-      .then((response) => {
-        this.setState({ speciesChartData: response.data.results });
-      });
+  componentDidMount() {
+    this.getSpecies();
   }
 
   // getPlanets() {

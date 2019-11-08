@@ -31,14 +31,12 @@ class BarChart extends React.PureComponent {
     const { data, xKey, yKey, chartWidth, chartHeight, barWidth, strokeWidth } = this.props;
 
     return (
-    
       <VictoryChart
         width={chartWidth}
         height={chartHeight}
         padding={{ top: 8, left: 50, bottom: 50, right: 50 }}
         domainPadding={{ x: barWidth / 2 }}
         theme={VictoryTheme.material}
-      
       >
         <VictoryAxis
           crossAxis
@@ -61,7 +59,6 @@ class BarChart extends React.PureComponent {
           style={{ data: { fill: pink, stroke: teal, strokeWidth, width: barWidth } }}
         />
       </VictoryChart>
-      
     );
   }
 }
