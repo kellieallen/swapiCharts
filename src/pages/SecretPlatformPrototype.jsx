@@ -76,9 +76,7 @@ class SecretPlatformPrototype extends React.PureComponent {
 
   // eslint-disable-next-line react/sort-comp
   async getSpecies() {
-    const response = await axios.get(
-      'https://cors-anywhere.herokuapp.com/http://swapi.co/api/species/'
-    );
+    const response = await axios.get('https://swapi.co/api/species/');
     this.setState({ speciesChartData: response.data.results });
   }
 
@@ -86,17 +84,17 @@ class SecretPlatformPrototype extends React.PureComponent {
     this.getSpecies();
   }
 
-  // getPlanets() {
-  //   return axios.get("https://cors-anywhere.herokuapp.com/http://swapi.co/api/planets/")
-  //   .then((response) => {
-  //     console.log(response.data.results);
-  //     this.setState( { planetChartData: response.data.results})
-
-  //   })
+  // async getPlanets() {
+  //   const response = await axios.get(
+  //     'https://swapi.co/api/planets/'
+  //   );
+  //   console.log(response.data.results);
+  //   this.setState({ planetChartData: response.data.results });
   // }
 
+  // // eslint-disable-next-line no-dupe-class-members
   // componentDidMount() {
-  //   this.getPlanets()
+  //   this.getPlanets();
   // }
 
   renderPlanetChartTooltip = ({ name, diameter }) => {

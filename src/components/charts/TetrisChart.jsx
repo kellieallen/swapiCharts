@@ -255,10 +255,12 @@ const TetrisChart = memo(function TetrisChart({
 });
 
 TetrisChart.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.shape({
-    name: PropTypes.string,
-    value: PropTypes.number
-  })),
+  data: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string,
+      value: PropTypes.number
+    })
+  ),
   viewportX: PropTypes.number,
   viewportY: PropTypes.number,
   columns: PropTypes.number,
