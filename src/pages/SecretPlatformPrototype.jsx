@@ -10,6 +10,7 @@ import Tooltip from '../components/Tooltip';
 import '../styles/pages/secret-platform-prototype.scss';
 
 class SecretPlatformPrototype extends React.PureComponent {
+  // eslint-disable-next-line react/sort-comp
   static propTypes = {
     starWarsData: PropTypes.shape({
       species: PropTypes.arrayOf(PropTypes.shape({})),
@@ -73,16 +74,16 @@ class SecretPlatformPrototype extends React.PureComponent {
     };
   }
 
+  componentDidMount() {
+    this.getSpecies();
+  }
+
   getSpecies() {
     return axios
       .get('https://cors-anywhere.herokuapp.com/http://swapi.co/api/species/')
       .then((response) => {
         this.setState({ speciesChartData: response.data.results });
       });
-  }
-
-  componentDidMount() {
-    this.getSpecies();
   }
 
   // getPlanets() {
