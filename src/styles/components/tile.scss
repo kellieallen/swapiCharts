@@ -1,8 +1,7 @@
 .tile {
   flex: 1;
   align-self: baseline;
-  min-width: 600px;
-  max-width: calc(50% - 58px);
+  max-width: 100vw;
   padding: 20px;
   margin-bottom: 0;
   background-color: $white;

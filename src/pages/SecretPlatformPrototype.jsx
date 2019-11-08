@@ -9,9 +9,6 @@ import TetrisChart from '../components/charts/TetrisChart';
 import Tooltip from '../components/Tooltip';
 import '../styles/pages/secret-platform-prototype.scss';
 
-
-
-
 class SecretPlatformPrototype extends React.PureComponent {
   static propTypes = {
     starWarsData: PropTypes.shape({
@@ -22,8 +19,6 @@ class SecretPlatformPrototype extends React.PureComponent {
       species: PropTypes.bool,
       planets: PropTypes.bool
     })
-
-    
   };
 
   static instructions = () => {
@@ -69,37 +64,25 @@ class SecretPlatformPrototype extends React.PureComponent {
     );
   };
 
-  
-
   constructor() {
     super();
-
-    
 
     this.state = {
       speciesChartData: [],
       planetChartData: []
     };
-    // this.getSpecies = this.getSpecies.bind(this);
-    // this.getPlanet = this.getPlanet.bind(this);
-
-    
   }
 
-  
-  
-
   getSpecies() {
-    return axios.get("https://cors-anywhere.herokuapp.com/http://swapi.co/api/species/")
-    .then((response) => {
-      // console.log(response.data.results);
-      this.setState( { speciesChartData: response.data.results})
-     
-    })
+    return axios
+      .get('https://cors-anywhere.herokuapp.com/http://swapi.co/api/species/')
+      .then((response) => {
+        this.setState({ speciesChartData: response.data.results });
+      });
   }
 
   componentDidMount() {
-    this.getSpecies()
+    this.getSpecies();
   }
 
   // getPlanets() {
@@ -107,7 +90,7 @@ class SecretPlatformPrototype extends React.PureComponent {
   //   .then((response) => {
   //     console.log(response.data.results);
   //     this.setState( { planetChartData: response.data.results})
-     
+
   //   })
   // }
 
@@ -118,9 +101,9 @@ class SecretPlatformPrototype extends React.PureComponent {
   renderPlanetChartTooltip = ({ name, diameter }) => {
     return (
       <div className="flex-container justify-between align-baseline secret-platform-prototype-chart-tooltip">
-        <div className="secret-platform-prototype-chart-tooltip-name">{diameter}</div>
+        <div className="secret-platform-prototype-chart-tooltip-name">{Number(diameter)}</div>
         <div className="flex-container align-baseline secret-platform-prototype-chart-tooltip-value">
-          {diameter.toLocaleString('en-US')}
+          {Number(diameter).toLocaleString('en-US')}
           <div className="secret-platform-prototype-chart-tooltip-value-unit">km</div>
         </div>
       </div>
@@ -143,22 +126,31 @@ class SecretPlatformPrototype extends React.PureComponent {
             <div>Instructions</div>
           </Tooltip>
         </div>
-        <div className="flex-container justify-between secret-platform-prototype-page-charts-container">
-          <Tile
-            title="Star Wars Species Average Heights (cm)"
-            className="species-chart"
-            // isLoading={isLoadingStarWarsData.species === undefined || isLoadingStarWarsData.species}
-          >
-            <BarChart data={speciesChartData} xKey="name" yKey="average_height" />
+        <div className="display">
+          <div className="flex-container justify-between secret-platform-prototype-page-charts-container">
+            <Tile
+              title="Star Wars Species Average Heights (cm)"
+              className="species-chart"
+              // isLoading={isLoadingStarWarsData.species === undefined || isLoadingStarWarsData.species}
+            >
+              <BarChart
+                data={speciesChartData}
+                xKey="name"
+                yKey="average_height"
+                style={{ parent: { maxWidth: '50%' } }}
+              />
+            </Tile>
 
-          </Tile>
-          <Tile
-            title="Star Wars Planet Diameters (km)"
-            className="planets-chart"
-            // isLoading={isLoadingStarWarsData.planets === undefined || isLoadingStarWarsData.planets}
-          >
-            <TetrisChart data={planetChartData} onSectionHover={this.renderPlanetChartTooltip} />
-          </Tile>
+            <Tile
+              title="Star Wars Planet Diameters (km)"
+              className="planets-chart"
+              isLoading={
+                isLoadingStarWarsData.planets === undefined || isLoadingStarWarsData.planets
+              }
+            >
+              <TetrisChart data={planetChartData} onSectionHover={this.renderPlanetChartTooltip} />
+            </Tile>
+          </div>
         </div>
       </div>
     );
