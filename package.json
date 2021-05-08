@@ -42,7 +42,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.11.0",
     "react-app-polyfill": "^0.2.2",
-    "react-dev-utils": "^7.0.5",
+    "react-dev-utils": "^11.0.4",
     "react-dom": "^16.11.0",
     "react-measure": "^2.3.0",
     "react-redux": "^6.0.1",
